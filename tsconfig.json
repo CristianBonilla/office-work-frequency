@@ -18,6 +18,23 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": false,
     "importHelpers": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "@application/*": [
+        "src/application/*"
+      ],
+      "@contracts/*": [
+        "src/contracts/*"
+      ],
+      "@domain/*": [
+        "src/domain/*"
+      ],
+      "@infrastructure/*": [
+        "src/infrastructure/*"
+      ],
+      "@test/*": [
+        "test/*"
+      ]
+    }
   }
 }

@@ -3,11 +3,11 @@ import { Question, QuestionSet } from 'nest-commander';
 @QuestionSet({ name: 'dataset' })
 export class DatasetQuestion {
   @Question({
-    message: 'Enter the frequency of office work for each employee...\n',
+    message: 'Enter the frequency of office work for each employee...',
     name: 'dataset',
-    type: 'input'
+    type: 'editor'
   })
-  paseDatasetFile(value: string) {
+  passedDatasetFile(value: string) {
     return value;
   }
 }

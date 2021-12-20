@@ -1,6 +1,7 @@
 import { CHOICES } from '@contracts/choices/choices';
 import { Logger } from '@nestjs/common';
 import { Command, CommandRunner, InquirerService } from 'nest-commander';
+import { ReadDatasetService } from '@application/services/read-dataset/read-dataset.service';
 
 const [, MANUALLY] = CHOICES;
 
@@ -13,11 +14,10 @@ const [, MANUALLY] = CHOICES;
 export class FrequencyRunner implements CommandRunner {
   private readonly _logger = new Logger(FrequencyRunner.name);
 
-  constructor(private readonly _inquirer: InquirerService) {}
+  constructor(private readonly _inquirer: InquirerService, private readonly _readFile: ReadDatasetService) {}
 
   async run([input]: string[]) {
-    this._logger.log('Calculate how often employees worked in the office');
-
+    this._logger.log('Calculate how often employees work in the office');
     let type = input;
     if (!!type) {
       return;
@@ -26,7 +26,11 @@ export class FrequencyRunner implements CommandRunner {
     type = typeQuestion.type;
     if (MANUALLY === type) {
       const datasetQuestion = await this._inquirer.ask<{ dataset: 'string' }>('dataset', null);
-      console.log(datasetQuestion.dataset);
+      const dataset = await this._readFile.readDatasetFromText(datasetQuestion.dataset);
+      console.log(dataset);
+    } else {
+      const dataset = await this._readFile.readDatasetFromFile();
+      console.log(dataset);
     }
   }
 }

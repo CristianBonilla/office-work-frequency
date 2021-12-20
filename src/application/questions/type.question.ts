@@ -9,7 +9,7 @@ export class TypeQuestions {
     type: 'list',
     choices: CHOICES
   })
-  paseType(value: string) {
+  passedType(value: string) {
     return value;
   }
 }

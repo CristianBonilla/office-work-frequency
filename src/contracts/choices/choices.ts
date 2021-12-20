@@ -1,1 +1,1 @@
-export const CHOICES = ['From a created text file', 'Manually'] as const;
+export const CHOICES = ['From a created text file', 'Custom'] as const;

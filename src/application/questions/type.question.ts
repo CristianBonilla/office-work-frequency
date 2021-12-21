@@ -1,5 +1,5 @@
 import { Question, QuestionSet } from 'nest-commander';
-import { CHOICES } from '@contracts/choices/choices';
+import { CHOICES } from '@contracts/constants/choices';
 
 @QuestionSet({ name: 'type' })
 export class TypeQuestions {

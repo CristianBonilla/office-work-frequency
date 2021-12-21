@@ -1,6 +1,7 @@
-import { CHOICES } from '@contracts/choices/choices';
 import { Logger } from '@nestjs/common';
 import { Command, CommandRunner, InquirerService } from 'nest-commander';
+import { LOG } from '@contracts/constants/logger';
+import { CHOICES } from '@contracts/constants/choices';
 import { ReadDatasetService } from '@application/services/read-dataset/read-dataset.service';
 
 const [, CUSTOM_DATASET] = CHOICES;
@@ -17,7 +18,11 @@ export class FrequencyRunner implements CommandRunner {
   constructor(private readonly _inquirer: InquirerService, private readonly _readFile: ReadDatasetService) {}
 
   async run([input]: string[]) {
-    this._logger.log('Calculate how often employees work in the office\n');
+    const methodName = this.run.name;
+    this._logger.log(`::${methodName}:: starting...`);
+
+    LOG('\nCalculate how often employees work in the office\n');
+
     let type = input;
     if (!!type) {
       return;
@@ -32,5 +37,7 @@ export class FrequencyRunner implements CommandRunner {
       const dataset = await this._readFile.readDatasetFromFile();
       console.log(dataset);
     }
+
+    this._logger.log(`::${methodName}:: has been completed`);
   }
 }

@@ -1,4 +1,7 @@
+import { WeekDaysType } from '@contracts/constants/week-days';
+
 export interface Times {
+  day: keyof WeekDaysType;
   start: [number, number];
   end: [number, number];
 }

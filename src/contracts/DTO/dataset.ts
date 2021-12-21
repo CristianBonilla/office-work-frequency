@@ -10,3 +10,8 @@ export interface DataSet {
   employeeName: string;
   times: Times[];
 }
+
+export interface DataSetResult {
+  employeePairs: [DataSet, DataSet];
+  timeCoincidences: number;
+}

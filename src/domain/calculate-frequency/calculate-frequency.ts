@@ -1,21 +1,26 @@
 import { WARN } from '@contracts/constants/logger';
 import { WeekDaysType, WEEK_DAYS_KEYS } from '@contracts/constants/week-days';
-import { DataSet, Times } from '@contracts/DTO/dataset';
+import { DataSet, DataSetResult, Times } from '@contracts/DTO/dataset';
 
 export class CalculateFrequency {
   constructor(private readonly _dataset: string[]) {}
 
   calc() {
     const pairs = this.employeePairs();
+    const datasetResult: DataSetResult[] = [];
     for (const [employeeA, employeeB] of pairs) {
+      let timeCoincidences = 0;
       for (const key of WEEK_DAYS_KEYS) {
         const timeA = employeeA.times.find(({ day }) => day === key);
         const timeB = employeeB.times.find(({ day }) => day === key);
-        if (!!timeA && !!timeB) {
-          this.checkTime(timeA, timeB);
+        if (!!timeA && !!timeB && this.checkTime(timeA, timeB)) {
+          timeCoincidences++;
         }
       }
+      datasetResult.push({ employeePairs: [employeeA, employeeB], timeCoincidences });
     }
+
+    return datasetResult;
   }
 
   private checkTime(timeA: Omit<Times, 'day'>, timeB: Omit<Times, 'day'>) {

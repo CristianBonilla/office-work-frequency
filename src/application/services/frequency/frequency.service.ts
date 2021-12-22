@@ -6,6 +6,11 @@ export class FrequencyService {
   constructor(@Inject('DATASET') private readonly _factory: DatasetFactoryFunc) {}
 
   calcFrequency(dataset: string[]) {
-    this._factory(dataset).getDatasetResult();
+    const datasetResult = this._factory(dataset).getDatasetResult();
+
+    return datasetResult.map<[string, number]>(({ employeePairs: [employeeA, employeeB], timeCoincidences }) => [
+      `${employeeA.employeeName}-${employeeB.employeeName}`,
+      timeCoincidences
+    ]);
   }
 }

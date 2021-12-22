@@ -1,7 +1,5 @@
-import { Injectable } from '@nestjs/common';
 import { DatasetOperations } from '@domain/dataset/dataset-operations';
 
-@Injectable()
 export class DatasetOperationsFacade {
   private readonly _datasetOperations: DatasetOperations;
 

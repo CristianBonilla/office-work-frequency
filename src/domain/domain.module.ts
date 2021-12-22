@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { DatasetOperationsFacade } from '@domain/dataset/dataset-operations.facade';
+import { DATASET_OPERATIONS_PROVIDER } from '@domain/providers/dataset.provider';
 
 @Module({
-  providers: [DatasetOperationsFacade],
-  exports: [DatasetOperationsFacade]
+  providers: [DATASET_OPERATIONS_PROVIDER]
 })
 export class DomainModule {}

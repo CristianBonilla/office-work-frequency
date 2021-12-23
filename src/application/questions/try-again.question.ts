@@ -1,7 +1,7 @@
 import { Question, QuestionSet } from 'nest-commander';
 
 @QuestionSet({ name: 'try-again' })
-export class TryAgainQuestions {
+export class TryAgainQuestion {
   @Question({
     message: 'Do you want to try loading a dataset again?',
     name: 'try-again',

@@ -32,6 +32,9 @@
       "@infrastructure/*": [
         "src/infrastructure/*"
       ],
+      "@providers/*": [
+        "src/providers/*"
+      ],
       "@test/*": [
         "test/*"
       ]

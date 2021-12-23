@@ -2,7 +2,7 @@ import { Question, QuestionSet } from 'nest-commander';
 import { CHOICES } from '@contracts/constants/choices';
 
 @QuestionSet({ name: 'type' })
-export class TypeQuestions {
+export class TypeQuestion {
   @Question({
     message: 'How do you want the data set?',
     name: 'type',

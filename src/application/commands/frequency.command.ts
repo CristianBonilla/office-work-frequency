@@ -15,6 +15,7 @@ const [DATASET_FILE] = CHOICES;
 })
 export class FrequencyRunner implements CommandRunner {
   private readonly _logger = new Logger(FrequencyRunner.name);
+  private _tryAgain = false;
 
   constructor(
     private readonly _inquirer: InquirerService,
@@ -24,7 +25,9 @@ export class FrequencyRunner implements CommandRunner {
 
   async run([input]: string[]) {
     const methodName = this.run.name;
-    this._logger.log(`::${methodName}:: starting...`);
+    if (!this._tryAgain) {
+      this._logger.log(`::${methodName}:: starting...`);
+    }
 
     LOG('\nCalculate how often employees work in the office\n');
 
@@ -41,14 +44,16 @@ export class FrequencyRunner implements CommandRunner {
       const customDatasetQuestion = await this._inquirer.ask<{ 'custom-dataset': 'string' }>('custom-dataset', null);
       dataset = await this._readFile.readDatasetFromText(customDatasetQuestion['custom-dataset']);
     }
-    const result = this._frequency.calcFrequency(dataset);
-    console.table(result);
+    const table = this._frequency.calcFrequency(dataset);
+    console.log(table.toString());
     const tryAgainQuestion = await this._inquirer.ask<{ 'try-again': 'string' }>('try-again', null);
-    if (!!tryAgainQuestion['try-again']) {
+    this._tryAgain = !!tryAgainQuestion['try-again'];
+    if (this._tryAgain) {
       this.run([null]);
 
       return;
     }
+    this._tryAgain = false;
 
     this._logger.log(`::${methodName}:: has been completed`);
   }

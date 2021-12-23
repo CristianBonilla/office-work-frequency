@@ -1,14 +1,19 @@
 import { WeekDaysType } from '@contracts/constants/week-days';
 
-export interface Times {
+export interface TimeDetail {
+  hour: number;
+  minute: number;
+}
+
+export interface Time {
   day: keyof WeekDaysType;
-  start: [number, number];
-  end: [number, number];
+  start: TimeDetail;
+  end: TimeDetail;
 }
 
 export interface DataSet {
   employeeName: string;
-  times: Times[];
+  times: Time[];
 }
 
 export interface DataSetResult {

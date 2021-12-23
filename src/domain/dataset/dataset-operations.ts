@@ -1,7 +1,8 @@
 import { WEEK_DAYS_KEYS } from '@contracts/constants/week-days';
-import { DataSet, DataSetResult, Times } from '@contracts/DTO/dataset';
+import { DataSet, DataSetResult, Time } from '@contracts/DTO/dataset';
 import { ExtractDataset } from '@domain/dataset/extract-dataset';
-import { TimeLapses } from '@domain/time-lapses';
+import { TimeLapsesInHours } from '@domain/time-lapses-in-hours';
+import { TimeLapsesInMinutes } from '@domain/time-lapses-in-minutes';
 
 export class DatasetOperations {
   private readonly _extractDataset: ExtractDataset;
@@ -28,19 +29,11 @@ export class DatasetOperations {
     return datasetResult;
   }
 
-  private hasTimeCoincidences(timeA: Omit<Times, 'day'>, timeB: Omit<Times, 'day'>) {
-    const {
-      start: [startHourA, startMinuteA],
-      end: [endHourA, endMinuteA]
-    } = timeA;
-    const {
-      start: [startHourB, startMinuteB],
-      end: [endHourB, endMinuteB]
-    } = timeB;
-    const inHours = new TimeLapses([startHourA, endHourA], [startHourB, endHourB]);
-    const inMinutes = new TimeLapses([startMinuteA, endMinuteA], [startMinuteB, endMinuteB]);
+  private hasTimeCoincidences(timeA: Omit<Time, 'day'>, timeB: Omit<Time, 'day'>) {
+    const inHours = new TimeLapsesInHours(timeA, timeB);
+    const inMinutes = new TimeLapsesInMinutes(timeA, timeB);
 
-    return inHours.hasCoincidences() && inMinutes.hasCoincidences();
+    return inHours.hasCoincidences() || inMinutes.hasCoincidences();
   }
 
   private getEmployeePairs() {

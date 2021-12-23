@@ -1,6 +1,6 @@
 import { WARN } from '@contracts/constants/logger';
 import { WeekDaysType, WEEK_DAYS_KEYS } from '@contracts/constants/week-days';
-import { DataSet, Times } from '@contracts/DTO/dataset';
+import { DataSet, Time, TimeDetail } from '@contracts/DTO/dataset';
 
 export class ExtractDataset {
   constructor(private readonly _dataset: string[]) {}
@@ -43,12 +43,13 @@ export class ExtractDataset {
     return [data.substring(0, partition), data.substring(partition + 1).split(',')];
   }
 
-  private extractTimes(time: string): Times {
+  private extractTimes(time: string): Time {
     const day = time.substring(0, 2) as keyof WeekDaysType;
     const [start, end] = time
       .substring(2)
       .split('-')
-      .map(value => value.split(':').map(Number) as [number, number]);
+      .map(value => value.split(':').map(Number) as [number, number])
+      .map<TimeDetail>(([hour, minute]) => ({ hour, minute }));
 
     return { day, start, end };
   }

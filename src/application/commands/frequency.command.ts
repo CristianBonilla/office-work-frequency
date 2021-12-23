@@ -43,6 +43,12 @@ export class FrequencyRunner implements CommandRunner {
     }
     const result = this._frequency.calcFrequency(dataset);
     console.table(result);
+    const tryAgainQuestion = await this._inquirer.ask<{ 'try-again': 'string' }>('try-again', null);
+    if (!!tryAgainQuestion['try-again']) {
+      this.run([null]);
+
+      return;
+    }
 
     this._logger.log(`::${methodName}:: has been completed`);
   }

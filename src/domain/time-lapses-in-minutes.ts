@@ -58,6 +58,62 @@ export class TimeLapsesInMinutes {
     return this._startHA === this._startHB && this._endHA === this._endHB && this._startMA >= this._startMB && this._endMA <= this._endMB;
   }
 
+  private get thirteenth() {
+    return this._startHA === this._endHB && this._startHA > this._startHB && this._endHB < this._endHA && this._startMA <= this._endMB;
+  }
+
+  private get fourteenth() {
+    return this._startHB === this._endHA && this._startHB > this._startHA && this._endHA < this._endHB && this._startMB <= this._endMA;
+  }
+
+  private get fifteenth() {
+    return (
+      this._startHA === this._startHB &&
+      this._startHB === this._endHA &&
+      this._endHA < this._endHB &&
+      this._startMA <= this._startMB &&
+      this._startMB <= this._endMA
+    );
+  }
+
+  private get sixteenth() {
+    return (
+      this._startHB === this._endHA &&
+      this._endHA === this._endHB &&
+      this._startHA < this._startHB &&
+      this._startMB <= this._endMA &&
+      this._endMA <= this._endMB
+    );
+  }
+
+  private get seventeenth() {
+    return this._startHB === this._endHB && this._startHA < this._startHB && this._endHB < this._endHA && this._startMB < this._endMB;
+  }
+
+  private get eighteenth() {
+    return this._startHA === this._endHA && this._startHB < this._startHA && this._endHA < this._endHB && this._startMA < this._endMA;
+  }
+
+  private get nineteenth() {
+    return (
+      this._startHA === this._startHB &&
+      this._startHB === this._endHB &&
+      this._endHB < this._endHA &&
+      this._startMA <= this._startMB &&
+      this._startMB < this._endMB
+    );
+  }
+
+  private get twentieth() {
+    return (
+      this._startHA === this._endHA &&
+      this._endHA === this._endHB &&
+      this._startHA > this._startHB &&
+      this._startMA < this._endMA &&
+      this._endMA <= this._endMB
+    );
+  }
+
   constructor(timeA: Omit<Time, 'day'>, timeB: Omit<Time, 'day'>) {
     const {
       start: { hour: startHA, minute: startMA },
@@ -90,7 +146,15 @@ export class TimeLapsesInMinutes {
       this.nineth,
       this.tenth,
       this.eleventh,
-      this.twelfth
+      this.twelfth,
+      this.thirteenth,
+      this.fourteenth,
+      this.fifteenth,
+      this.sixteenth,
+      this.seventeenth,
+      this.eighteenth,
+      this.nineteenth,
+      this.twentieth
     ].some(lapse => lapse);
   }
 }

@@ -29,7 +29,7 @@ export class FrequencyRunner implements CommandRunner {
       this._logger.log(`::${methodName}:: starting...`);
     }
 
-    LOG('\nCalculate how often employees work in the office\n');
+    LOG('Calculate how often employees work in the office');
 
     let type = input;
     if (!!type) {

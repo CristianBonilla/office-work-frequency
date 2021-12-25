@@ -5,12 +5,25 @@ import { DataSet, Time, TimeDetail } from '@contracts/DTO/dataset';
 export class ExtractDataset {
   constructor(private readonly _dataset: string[]) {}
 
+  checkFormat(data: string) {
+    const nameExpr = '([A-Za-z\\s]+)';
+    const timeExpr = '((MO|TU|WE|TH|FR|SA|SU)((2(?:[0-3])|[0-1][0-9]):[0-5][0-9])-((2(?:[0-3])|[0-1][0-9]):[0-5][0-9]))';
+    const expr = new RegExp(`^${nameExpr}=(${timeExpr},{1})+${timeExpr}$`);
+
+    return expr.test(data);
+  }
+
   extract() {
     const dataset: DataSet[] = [];
     for (const data of this._dataset) {
+      if (!this.checkFormat(data)) {
+        WARN(`The dataset does not conform to the established format, it will be canceled\n${data}`);
+
+        continue;
+      }
       const [name, times] = this.extractData(data.replace(/\s+/g, ''));
       if (dataset.some(({ employeeName }) => employeeName === name)) {
-        WARN(`The employee ${name} is already part, it will be canceled ${data}`);
+        WARN(`The employee ${name} is already part, it will be canceled\n${data}`);
 
         continue;
       }

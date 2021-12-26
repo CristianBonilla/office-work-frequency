@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-export { DB_CONNECTIONS } from 'src/config/connections.config';
+export { DB_CONNECTIONS } from './connections.config';
 
 export const ENV = process.env.NODE_ENV;
 

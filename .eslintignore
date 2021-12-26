@@ -1,0 +1,7 @@
+build/*
+dist/*
+bundle.js
+test/jest-e2e.js
+*.d.ts
+.*/*
+.*

@@ -13,8 +13,8 @@ const [DATASET_FILE] = CHOICES;
   options: { isDefault: true },
   description: 'Calculate how often employees work in the office'
 })
-export class FrequencyRunner implements CommandRunner {
-  private readonly _logger = new Logger(FrequencyRunner.name);
+export class FrequencyCommand implements CommandRunner {
+  private readonly _logger = new Logger(FrequencyCommand.name);
   private _tryAgain = false;
 
   constructor(

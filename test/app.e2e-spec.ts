@@ -1,21 +1,20 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from 'src/app.module';
+import { CommandTestFactory } from 'nest-commander-testing';
+import { TestingModule } from '@nestjs/testing';
+import { AppModule } from '../src/app.module';
+import { CHOICES } from '@contracts/constants/choices';
 
-describe('AppController (e2e)', () => {
-  let app: INestApplication;
+const [DATASET_FILE] = CHOICES;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+describe('FrequencyCommand (e2e)', () => {
+  let commandInstance: TestingModule;
+
+  beforeAll(async () => {
+    commandInstance = await CommandTestFactory.createTestingCommand({
       imports: [AppModule]
     }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer()).get('/').expect(200).expect('Hello World!');
+  it('should call the "run" method', async () => {
+    await CommandTestFactory.run(commandInstance, [DATASET_FILE]);
   });
 });

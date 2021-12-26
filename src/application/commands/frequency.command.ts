@@ -5,7 +5,7 @@ import { CHOICES } from '@contracts/constants/choices';
 import { ReadDatasetService } from '@application/services/read-dataset/read-dataset.service';
 import { FrequencyService } from '@application/services/frequency/frequency.service';
 
-const [DATASET_FILE] = CHOICES;
+const [DATASET_FILE, CUSTOM] = CHOICES;
 
 @Command({
   name: 'frequency',
@@ -32,11 +32,10 @@ export class FrequencyCommand implements CommandRunner {
     LOG('Calculate how often employees work in the office');
 
     let type = input;
-    if (!!type) {
-      return;
+    if (!type || (type !== DATASET_FILE && type !== CUSTOM)) {
+      const typeQuestion = await this._inquirer.ask<{ type: 'string' }>('type', null);
+      type = typeQuestion.type;
     }
-    const typeQuestion = await this._inquirer.ask<{ type: 'string' }>('type', null);
-    type = typeQuestion.type;
     let dataset: string[];
     if (DATASET_FILE === type) {
       dataset = await this._readFile.readDatasetFromFile();

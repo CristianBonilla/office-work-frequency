@@ -7,9 +7,10 @@ import { CHOICES } from '@contracts/constants/choices';
 import { ApplicationModule } from '@application/application.module';
 import { ReadDatasetService } from '@application/services/read-dataset/read-dataset.service';
 import { FrequencyService } from '@application/services/frequency/frequency.service';
+import { asMock } from '@test/helpers';
 
 jest.mock('@contracts/constants/logger');
-const mockLOG = LOG as jest.MockedFunction<typeof LOG>;
+const mockLOG = asMock(LOG);
 
 const [DATASET_FILE, CUSTOM] = CHOICES;
 

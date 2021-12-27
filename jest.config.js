@@ -1,7 +1,6 @@
 const { pathsToModuleNameMapper } = require('ts-jest');
 const { compilerOptions } = require('./tsconfig.json');
 const { defaults } = require('jest-config');
-const { resolve } = require('path');
 
 module.exports = {
   moduleFileExtensions: [...defaults.moduleFileExtensions],
@@ -14,7 +13,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     'node_modules',
     '.module.ts',
-    '<rootDir>/src/main.ts',
+    '<rootDir>/src/main.ts'
   ],
   coverageDirectory: './coverage',
   coverageThreshold: {

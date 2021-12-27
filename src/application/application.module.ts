@@ -6,7 +6,7 @@ import { DomainModule } from '@domain/domain.module';
 import { TypeQuestion } from '@application/questions/type.question';
 import { CustomDatasetQuestion } from '@application/questions/custom-dataset.question';
 import { TryAgainQuestion } from '@application/questions/try-again.question';
-import { FrequencyCommand } from '@application/commands/frequency.command';
+import { FrequencyCommand } from '@application/commands/frequency/frequency.command';
 import { ReadDatasetService } from '@application/services/read-dataset/read-dataset.service';
 import { FrequencyService } from '@application/services/frequency/frequency.service';
 

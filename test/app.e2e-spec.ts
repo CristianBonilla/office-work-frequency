@@ -7,24 +7,24 @@ import { AppModule } from '../src/app.module';
 const [DATASET_FILE] = CHOICES;
 
 describe('FrequencyCommand (e2e)', () => {
-  let commandInstance: TestingModule;
+  let command: TestingModule;
   let inquirer: InquirerService;
 
   beforeAll(async () => {
-    commandInstance = await CommandTestFactory.createTestingCommand({
+    command = await CommandTestFactory.createTestingCommand({
       imports: [AppModule]
     }).compile();
-    inquirer = commandInstance.get(InquirerService);
+    inquirer = command.get(InquirerService);
   });
 
-  it('should call the "run" method', async () => {
+  it('should invoke the "run" method', async () => {
     // arrange
-    const askSpy = jest.spyOn(inquirer, 'ask').mockReturnValue(Promise.resolve(false));
+    jest.spyOn(inquirer, 'ask').mockReturnValue(Promise.resolve({ 'try-again': false }));
 
     // act
-    await CommandTestFactory.run(commandInstance, [DATASET_FILE]);
+    await CommandTestFactory.run(command, [DATASET_FILE]);
 
     // assert
-    expect(askSpy).toBeCalled();
+    expect(inquirer.ask).toBeCalled();
   });
 });

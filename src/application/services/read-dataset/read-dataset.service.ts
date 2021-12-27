@@ -17,7 +17,7 @@ export class ReadDatasetService {
   }
 
   readDatasetFromText(text: string) {
-    const buffer = Buffer.from(text);
+    const buffer = Buffer.from(text, 'utf-8');
     const bufferStream = new stream.PassThrough();
     bufferStream.end(buffer);
 

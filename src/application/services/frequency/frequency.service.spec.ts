@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DatasetFactoryFunc } from '@domain/providers/dataset.provider';
 import { FrequencyService } from '@application/services/frequency/frequency.service';
 import { DatasetOperationsFacade } from '@domain/dataset/dataset-operations.facade';
-import { DATASET, DATASET_RESULT } from '@test/dataset';
+import { DATASET, DATASET_RESULT } from '@test/dataset/dataset';
 
 describe('FrequencyService', () => {
   let service: FrequencyService;

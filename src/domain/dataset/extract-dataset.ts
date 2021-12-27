@@ -5,14 +5,6 @@ import { DataSet, Time, TimeDetail } from '@contracts/DTO/dataset';
 export class ExtractDataset {
   constructor(private readonly _dataset: string[]) {}
 
-  checkFormat(data: string) {
-    const nameExpr = '([A-Za-z\\s]+)';
-    const timeExpr = '((MO|TU|WE|TH|FR|SA|SU)((2(?:[0-3])|[0-1][0-9]):[0-5][0-9])-((2(?:[0-3])|[0-1][0-9]):[0-5][0-9]))';
-    const expr = new RegExp(`^${nameExpr}=(${timeExpr},{1})+${timeExpr}$`);
-
-    return expr.test(data);
-  }
-
   extract() {
     const dataset: DataSet[] = [];
     for (const data of this._dataset) {
@@ -48,6 +40,14 @@ export class ExtractDataset {
     }
 
     return dataset;
+  }
+
+  private checkFormat(data: string) {
+    const nameExpr = '([A-Za-z\\s]+)';
+    const timeExpr = '((MO|TU|WE|TH|FR|SA|SU)((2(?:[0-3])|[0-1][0-9]):[0-5][0-9])-((2(?:[0-3])|[0-1][0-9]):[0-5][0-9]))';
+    const expr = new RegExp(`^${nameExpr}=(${timeExpr},{1})+${timeExpr}$`);
+
+    return expr.test(data);
   }
 
   private extractData(data: string): [string, string[]] {

@@ -7,7 +7,7 @@ export class TimeLapsesInHours {
   private readonly _endB: number;
 
   private get first() {
-    return this._startA === this._startB && this._endA === this._endB;
+    return this._startA === this._startB && this._endA === this._endB && this._startA < this._endA && this._startB < this._endB;
   }
 
   private get second() {

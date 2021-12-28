@@ -1,65 +1,156 @@
-import { Time, TimeDetail } from '@contracts/DTO/dataset';
+import { Time } from '@contracts/DTO/dataset';
 
 export class TimeLapsesInMinutes {
-  private readonly _startA: TimeDetail;
-  private readonly _endA: TimeDetail;
-  private readonly _startB: TimeDetail;
-  private readonly _endB: TimeDetail;
+  private readonly _startHA: number;
+  private readonly _startMA: number;
+  private readonly _endHA: number;
+  private readonly _endMA: number;
+  private readonly _startHB: number;
+  private readonly _startMB: number;
+  private readonly _endHB: number;
+  private readonly _endMB: number;
+
+  private get first() {
+    return this._startHA === this._startHB && this._endHA < this._endHB && this._startMA <= this._startMB;
+  }
+
+  private get second() {
+    return this._startHA === this._startHB && this._endHA > this._endHB && this._startMA >= this._startMB;
+  }
+
+  private get third() {
+    return this._endHA === this._endHB && this._startHA < this._startHB && this._endMA <= this._endMB;
+  }
+
+  private get fourth() {
+    return this._endHA === this._endHB && this._startHA > this._startHB && this._endMA >= this._endMB;
+  }
+
+  private get fifth() {
+    return this._startHA === this._startHB && this._endHA < this._endHB && this._startMA >= this._startMB;
+  }
+
+  private get sixth() {
+    return this._startHA === this._startHB && this._endHA > this._endHB && this._startMA <= this._startMB;
+  }
+
+  private get seventh() {
+    return this._endHA === this._endHB && this._startHA > this._startHB && this._endMA <= this._endMB;
+  }
+
+  private get eighth() {
+    return this._endHA === this._endHB && this._startHA < this._startHB && this._endMA >= this._endMB;
+  }
+
+  private get nineth() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startMA <= this._startMB && this._endMA <= this._endMB;
+  }
+
+  private get tenth() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startMA >= this._startMB && this._endMA >= this._endMB;
+  }
+
+  private get eleventh() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startMA <= this._startMB && this._endMA >= this._endMB;
+  }
+
+  private get twelfth() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startMA >= this._startMB && this._endMA <= this._endMB;
+  }
+
+  private get thirteenth() {
+    return this._startHA === this._endHB && this._startHA > this._startHB && this._endHB < this._endHA && this._startMA <= this._endMB;
+  }
+
+  private get fourteenth() {
+    return this._startHB === this._endHA && this._startHB > this._startHA && this._endHA < this._endHB && this._startMB <= this._endMA;
+  }
+
+  private get fifteenth() {
+    return (
+      this._startHA === this._startHB &&
+      this._startHB === this._endHA &&
+      this._endHA < this._endHB &&
+      this._startMA <= this._startMB &&
+      this._startMB <= this._endMA
+    );
+  }
+
+  private get sixteenth() {
+    return (
+      this._startHB === this._endHA &&
+      this._endHA === this._endHB &&
+      this._startHA < this._startHB &&
+      this._startMB <= this._endMA &&
+      this._endMA <= this._endMB
+    );
+  }
+
+  private get seventeenth() {
+    return this._startHB === this._endHB && this._startHA < this._startHB && this._endHB < this._endHA && this._startMB < this._endMB;
+  }
+
+  private get eighteenth() {
+    return this._startHA === this._endHA && this._startHB < this._startHA && this._endHA < this._endHB && this._startMA < this._endMA;
+  }
+
+  private get nineteenth() {
+    return (
+      this._startHA === this._startHB &&
+      this._startHB === this._endHB &&
+      this._endHB < this._endHA &&
+      this._startMA <= this._startMB &&
+      this._startMB < this._endMB
+    );
+  }
+
+  private get twentieth() {
+    return (
+      this._startHA === this._endHA &&
+      this._endHA === this._endHB &&
+      this._startHA > this._startHB &&
+      this._startMA < this._endMA &&
+      this._endMA <= this._endMB
+    );
+  }
 
   constructor(timeA: Omit<Time, 'day'>, timeB: Omit<Time, 'day'>) {
-    this._startA = timeA.start;
-    this._endA = timeA.end;
-    this._startB = timeB.start;
-    this._endB = timeB.end;
+    const { hour: startHA, minute: startMA } = timeA.start;
+    const { hour: endHA, minute: endMA } = timeA.end;
+    const { hour: startHB, minute: startMB } = timeB.start;
+    const { hour: endHB, minute: endMB } = timeB.end;
+    this._startHA = startHA;
+    this._startMA = startMA;
+    this._endHA = endHA;
+    this._endMA = endMA;
+    this._startHB = startHB;
+    this._startMB = startMB;
+    this._endHB = endHB;
+    this._endMB = endMB;
   }
 
   hasCoincidences() {
-    const { hour: startHA, minute: startMA } = this._startA;
-    const { hour: endHA, minute: endMA } = this._endA;
-    const { hour: startHB, minute: startMB } = this._startB;
-    const { hour: endHB, minute: endMB } = this._endB;
-    const first = startHA === startHB && endHA < endHB && startMA <= startMB;
-    const second = startHA === startHB && endHA > endHB && startMA >= startMB;
-    const third = endHA === endHB && startHA < startHB && endMA <= endMB;
-    const fourth = endHA === endHB && startHA > startHB && endMA >= endMB;
-    const fifth = startHA === startHB && endHA < endHB && startMA >= startMB;
-    const sixth = startHA === startHB && endHA > endHB && startMA <= startMB;
-    const seventh = endHA === endHB && startHA > startHB && endMA <= endMB;
-    const eighth = endHA === endHB && startHA < startHB && endMA >= endMB;
-    const nineth = startHA === startHB && endHA === endHB && startMA <= startMB && endMA <= endMB;
-    const tenth = startHA === startHB && endHA === endHB && startMA >= startMB && endMA >= endMB;
-    const eleventh = startHA === startHB && endHA === endHB && startMA <= startMB && endMA >= endMB;
-    const twelfth = startHA === startHB && endHA === endHB && startMA >= startMB && endMA <= endMB;
-    const thirteenth = startHA === endHB && startHA > startHB && endHB < endHA && startMA <= endMB;
-    const fourteenth = startHB === endHA && startHB > startHA && endHA < endHB && startMB <= endMA;
-    const fifteenth = startHA === startHB && startHB === endHA && endHA < endHB && startMA <= startMB && startMB <= endMA;
-    const sixteenth = startHB === endHA && endHA === endHB && startHA < startHB && startMB <= endMA && endMA <= endMB;
-    const seventeenth = startHB === endHB && startHA < startHB && endHB < endHA && startMB < endMB;
-    const eighteenth = startHA === endHA && startHB < startHA && endHA < endHB && startMA < endMA;
-    const nineteenth = startHA === startHB && startHB === endHB && endHB < endHA && startMA <= startMB && startMB < endMB;
-    const twentieth = startHA === endHA && endHA === endHB && startHA > startHB && startMA < endMA && endMA <= endMB;
-
     return [
-      first,
-      second,
-      third,
-      fourth,
-      fifth,
-      sixth,
-      seventh,
-      eighth,
-      nineth,
-      tenth,
-      eleventh,
-      twelfth,
-      thirteenth,
-      fourteenth,
-      fifteenth,
-      sixteenth,
-      seventeenth,
-      eighteenth,
-      nineteenth,
-      twentieth
+      this.first,
+      this.second,
+      this.third,
+      this.fourth,
+      this.fifth,
+      this.sixth,
+      this.seventh,
+      this.eighth,
+      this.nineth,
+      this.tenth,
+      this.eleventh,
+      this.twelfth,
+      this.thirteenth,
+      this.fourteenth,
+      this.fifteenth,
+      this.sixteenth,
+      this.seventeenth,
+      this.eighteenth,
+      this.nineteenth,
+      this.twentieth
     ].some(lapse => lapse);
   }
 }

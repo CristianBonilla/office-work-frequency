@@ -29,19 +29,16 @@ describe('TimeLapsesInHours', () => {
   });
 
   it('should correctly create the class of times lapses in hours', () => {
-    // arrange
+    // assert
     expect(timeLapsesInHours).toBeDefined();
   });
 
   it('should coincide the 2 times with the first lapse', () => {
-    // arrange
-    const firstSpy = jest.spyOn<any, 'first'>(timeLapsesInHours, 'first', 'get');
-
     // act
     const coincidence = timeLapsesInHours.hasCoincidences();
 
     // assert
-    expect(firstSpy).toBeCalled();
+    expect(timeLapsesInHours['first']).toBeTruthy();
     expect(coincidence).toBeTruthy();
   });
 
@@ -69,13 +66,12 @@ describe('TimeLapsesInHours', () => {
         }
       }
     );
-    const secondSpy = jest.spyOn<any, 'second'>(timeLapsesInHours, 'second', 'get');
 
     // act
     const coincidence = timeLapsesInHours.hasCoincidences();
 
     // assert
-    expect(secondSpy).toBeCalled();
+    expect(timeLapsesInHours['second']).toBeTruthy();
     expect(coincidence).toBeTruthy();
   });
 
@@ -103,13 +99,12 @@ describe('TimeLapsesInHours', () => {
         }
       }
     );
-    const thirdSpy = jest.spyOn<any, 'third'>(timeLapsesInHours, 'third', 'get');
 
     // act
     const coincidence = timeLapsesInHours.hasCoincidences();
 
     // assert
-    expect(thirdSpy).toBeCalled();
+    expect(timeLapsesInHours['third']).toBeTruthy();
     expect(coincidence).toBeTruthy();
   });
 
@@ -137,13 +132,12 @@ describe('TimeLapsesInHours', () => {
         }
       }
     );
-    const fourthSpy = jest.spyOn<any, 'fourth'>(timeLapsesInHours, 'fourth', 'get');
 
     // act
     const coincidence = timeLapsesInHours.hasCoincidences();
 
     // assert
-    expect(fourthSpy).toBeCalled();
+    expect(timeLapsesInHours['fourth']).toBeTruthy();
     expect(coincidence).toBeTruthy();
   });
 
@@ -171,13 +165,12 @@ describe('TimeLapsesInHours', () => {
         }
       }
     );
-    const fifthSpy = jest.spyOn<any, 'fifth'>(timeLapsesInHours, 'fifth', 'get');
 
     // act
     const coincidence = timeLapsesInHours.hasCoincidences();
 
     // assert
-    expect(fifthSpy).toBeCalled();
+    expect(timeLapsesInHours['fifth']).toBeTruthy();
     expect(coincidence).toBeTruthy();
   });
 });

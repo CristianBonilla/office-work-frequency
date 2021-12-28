@@ -33,8 +33,9 @@ export class ReadDatasetService {
       });
       const lines = [];
       readInterface.on('line', line => {
-        if (!!line.trim()) {
-          lines.push(line);
+        const text = line.trim();
+        if (!!text) {
+          lines.push(text);
         }
       });
       inStream.on('end', () => {

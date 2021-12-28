@@ -13,7 +13,7 @@ Search for coincidences between pairs of employees in the time they have worked 
 
 ## Installations
 
-* Node >= **14.14.0**
+* node >= **14.14.0**
 * npm >= **6.14.8**
 * yarn >= **1.22.5**
 

@@ -13,15 +13,16 @@ module.exports = {
   coveragePathIgnorePatterns: [
     'node_modules',
     '.module.ts',
+    '<rootDir>/src/config',
     '<rootDir>/src/main.ts'
   ],
   coverageDirectory: './coverage',
   coverageThreshold: {
     global: {
-      statements: 70,
-      lines: 70,
-      branches: 70,
-      functions: 70
+      statements: 80,
+      lines: 80,
+      branches: 80,
+      functions: 80
     }
   },
   testEnvironment: 'node',

@@ -1,73 +1,106 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# OFFICE WORK FREQUENCY
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Search for coincidences between pairs of employees in the time they have worked in the offices, having flexibility
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## It was developed with the following
 
-## Description
+* **NodeJs** (Development environment with Javascript)
+* **Yarn** (Package manager)
+* **NestJs** (Modular framework)
+* **TypeScript** (JavaScript superset and static typing)
+* **Jest** (Unit tests and e2e)
+* **Eslint/Prettier** (Linter and code format)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Installations
 
-## Installation
+* Node >= **14.14.0**
+* npm >= **6.14.8**
+* yarn >= **1.22.5**
+
+### Yarn
 
 ```bash
-$ npm install
+yarn global add @nestjs/cli
 ```
 
-## Running the app
+## Running Instructions
+
+To install the project dependencies
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+yarn install
 ```
 
-## Test
+To run the unit tests
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+yarn run test
 ```
 
-## Support
+To run the e2e tests
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+yarn run test:e2e
+```
 
-## Stay in touch
+To generate the tests coverage report
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+yarn run test:cov
+```
+
+After generating the coverage report, go to the **"coverage/lcov-report"** folder and open the **index.html** file in the browser
+
+To run the project in a development environment
+
+```bash
+yarn run start:dev
+```
+
+## Program execution process
+
+Once you run the program in a development environment; there will be a choice type to select, if you want to load the dataset from a default text file or custom.
+
+If you choose the option from a text file, it will read the file found in the **src/shared/mocks/dataset.txt** directory, you can modify it if you wish, to do the corresponding tests.
+
+If you choose the custom option, it will create a file for you and open it in the editor of your choice (on windows it is notepad and on mac it is vim), so that you can add the data sets you want.
+
+After loading the data sets, you will create a table in the console with the employee pairs and the corresponding coincidences. For the results to be favorable, there is a regular expression that validates that the dataset must comply with the established format.
+
+At the end it will ask if you want to make a new attempt to load the dataset, pressing (y or n).
+
+## Architecture
+
+The architecture was created under the domain driven design (DDD) pattern, as the business focuses on the frequency of times according to the pairs of employees calculated and the coincidences as a result. The architecture is formed under the following layers.
+
+### Application
+
+Be in charge of defining the work to be done in the program and directing the domain to solve difficulties.
+
+### Contracts
+
+It is responsible for defining the types, constants, DTOs and interfaces that are part of the entire program.
+
+### Domain
+
+As its name implies, it is responsible for representing business concepts, for employee frequency and for obtaining coincidences.
+
+### Infrastructure
+
+This layer was not taken into account since there was no need to connect the data in memory or keep it persistent (databases).
+
+### Other Directories
+
+* **config** (Define and obtain the variables of the different environments).
+* **providers** (Providers for the entire project to be used as sources of help).
+* **shared** (Shared resources).
+
+## Design patterns
+
+* **Facade**
+* **Factory**
+* **Dependency injection**
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+Office Work Frequency is [MIT licensed](LICENSE).

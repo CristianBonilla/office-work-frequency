@@ -45,9 +45,7 @@ describe('FrequencyCommand', () => {
     // arrange
     const dataset: string[] = ['DATASET'];
     const table = new Table();
-    askSpy
-      .mockImplementationOnce(() => Promise.resolve({ type: DATASET_FILE }))
-      .mockImplementationOnce(() => Promise.resolve({ 'try-again': false }));
+    askSpy.mockImplementationOnce(() => Promise.resolve({ type: DATASET_FILE })).mockImplementationOnce(() => Promise.resolve({ 'try-again': false }));
     jest.spyOn(readFile, 'readDatasetFromFile').mockReturnValue(Promise.resolve(dataset));
     jest.spyOn(frequency, 'calcFrequency').mockReturnValue(table);
 

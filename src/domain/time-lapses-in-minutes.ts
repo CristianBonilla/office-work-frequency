@@ -67,23 +67,11 @@ export class TimeLapsesInMinutes {
   }
 
   private get fifteenth() {
-    return (
-      this._startHA === this._startHB &&
-      this._startHB === this._endHA &&
-      this._endHA < this._endHB &&
-      this._startMA <= this._startMB &&
-      this._startMB <= this._endMA
-    );
+    return this._startHA === this._startHB && this._startHB === this._endHA && this._endHA < this._endHB && this._startMA <= this._startMB && this._startMB <= this._endMA;
   }
 
   private get sixteenth() {
-    return (
-      this._startHB === this._endHA &&
-      this._endHA === this._endHB &&
-      this._startHA < this._startHB &&
-      this._startMB <= this._endMA &&
-      this._endMA <= this._endMB
-    );
+    return this._startHB === this._endHA && this._endHA === this._endHB && this._startHA < this._startHB && this._startMB <= this._endMA && this._endMA <= this._endMB;
   }
 
   private get seventeenth() {
@@ -95,23 +83,11 @@ export class TimeLapsesInMinutes {
   }
 
   private get nineteenth() {
-    return (
-      this._startHA === this._startHB &&
-      this._startHB === this._endHB &&
-      this._endHB < this._endHA &&
-      this._startMA <= this._startMB &&
-      this._startMB < this._endMB
-    );
+    return this._startHA === this._startHB && this._startHB === this._endHB && this._endHB < this._endHA && this._startMA <= this._startMB && this._startMB < this._endMB;
   }
 
   private get twentieth() {
-    return (
-      this._startHA === this._endHA &&
-      this._endHA === this._endHB &&
-      this._startHA > this._startHB &&
-      this._startMA < this._endMA &&
-      this._endMA <= this._endMB
-    );
+    return this._startHA === this._endHA && this._endHA === this._endHB && this._startHA > this._startHB && this._startMA < this._endMA && this._endMA <= this._endMB;
   }
 
   constructor(timeA: Omit<Time, 'day'>, timeB: Omit<Time, 'day'>) {

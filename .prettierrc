@@ -3,7 +3,7 @@
   "trailingComma": "none",
   "parser": "typescript",
   "arrowParens": "avoid",
-  "printWidth": 140,
+  "printWidth": 220,
   "singleQuote": true,
   "proseWrap": "never"
 }

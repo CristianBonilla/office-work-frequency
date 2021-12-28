@@ -17,11 +17,7 @@ export class FrequencyCommand implements CommandRunner {
   private readonly _logger = new Logger(FrequencyCommand.name);
   private _tryAgain = false;
 
-  constructor(
-    private readonly _inquirer: InquirerService,
-    private readonly _readFile: ReadDatasetService,
-    private readonly _frequency: FrequencyService
-  ) {}
+  constructor(private readonly _inquirer: InquirerService, private readonly _readFile: ReadDatasetService, private readonly _frequency: FrequencyService) {}
 
   async run([input]: string[]) {
     const methodName = this.run.name;

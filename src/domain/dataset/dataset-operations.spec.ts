@@ -112,9 +112,7 @@ describe('DatasetOperations', () => {
 
   it('should correctly return the result of the data sets', () => {
     // arrange
-    const employeePairsSpy = jest
-      .spyOn<any, 'getEmployeePairs'>(datasetOperations, 'getEmployeePairs')
-      .mockReturnValue([[DATASET_LIST[0], DATASET_LIST[1]]]);
+    const employeePairsSpy = jest.spyOn<any, 'getEmployeePairs'>(datasetOperations, 'getEmployeePairs').mockReturnValue([[DATASET_LIST[0], DATASET_LIST[1]]]);
     const hasCoincidencesSpy = jest.spyOn<any, 'hasTimeCoincidences'>(datasetOperations, 'hasTimeCoincidences');
     const getHasCoincidencesSpy = () => hasCoincidencesSpy.mock.results.every(({ value }) => !!value);
 

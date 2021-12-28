@@ -9,10 +9,7 @@ export class FrequencyService {
   calcFrequency(dataset: string[]) {
     const datasetResult = this._factory(dataset)
       .getDatasetResult()
-      .map<[string, number]>(({ employeePairs: [employeeA, employeeB], timeCoincidences }) => [
-        `${employeeA.employeeName}-${employeeB.employeeName}`,
-        timeCoincidences
-      ]);
+      .map<[string, number]>(({ employeePairs: [employeeA, employeeB], timeCoincidences }) => [`${employeeA.employeeName}-${employeeB.employeeName}`, timeCoincidences]);
     const table = this._table();
     table.push(...datasetResult);
 

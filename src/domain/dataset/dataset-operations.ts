@@ -42,10 +42,7 @@ export class DatasetOperations {
     const pairs = employeeNames
       .map<[string, string][]>((employeeName, index) => employeeNames.slice(index + 1).map(name => [employeeName, name]))
       .flat()
-      .map<[DataSet, DataSet]>(([nameA, nameB]) => [
-        dataset.find(({ employeeName }) => employeeName === nameA),
-        dataset.find(({ employeeName }) => employeeName === nameB)
-      ]);
+      .map<[DataSet, DataSet]>(([nameA, nameB]) => [dataset.find(({ employeeName }) => employeeName === nameA), dataset.find(({ employeeName }) => employeeName === nameB)]);
 
     return pairs;
   }

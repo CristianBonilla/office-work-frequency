@@ -42,10 +42,7 @@ describe('ExtractDataset', () => {
 
   it('should return a message that a dataset is not formatted and cancel it', () => {
     // arrange
-    const dataset: string[] = [
-      'RENE=MO10:15-12:00,TU10:00-12:00,, TH13:00-13:15,SA14:00-18:00',
-      'ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00'
-    ];
+    const dataset: string[] = ['RENE=MO10:15-12:00,TU10:00-12:00,, TH13:00-13:15,SA14:00-18:00', 'ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00'];
     const extractDataset = new ExtractDataset(dataset);
     jest.spyOn<any, 'checkFormat'>(extractDataset, 'checkFormat');
 
@@ -60,10 +57,7 @@ describe('ExtractDataset', () => {
 
   it('should return a message if there are duplicate employees within the dataset and cancel it', () => {
     // arrange
-    const dataset: string[] = [
-      'RENE=MO10:15-12:00,TU10:00-12:00,TH13:00-13:15,SA14:00-18:00,SU20:00-21:00',
-      'RENE=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00'
-    ];
+    const dataset: string[] = ['RENE=MO10:15-12:00,TU10:00-12:00,TH13:00-13:15,SA14:00-18:00,SU20:00-21:00', 'RENE=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00'];
     const extractDataset = new ExtractDataset(dataset);
 
     // act
@@ -78,10 +72,7 @@ describe('ExtractDataset', () => {
   it('should return a message if the days in the dataset do not match the weekdays and cancel it', () => {
     // arrange
     const fakeTime = 'FO19:33-21:00';
-    const dataset: string[] = [
-      'RENE=MO10:15-12:00,TU10:00-12:00,TH13:00-13:15,SA14:00-18:00,SU20:00-21:00',
-      `ASTRID=${fakeTime},TH12:00-14:00,SU20:00-21:00`
-    ];
+    const dataset: string[] = ['RENE=MO10:15-12:00,TU10:00-12:00,TH13:00-13:15,SA14:00-18:00,SU20:00-21:00', `ASTRID=${fakeTime},TH12:00-14:00,SU20:00-21:00`];
     const extractDataset = new ExtractDataset(dataset);
     const datasetList = DATASET_LIST.map(dataset => ({ ...dataset }));
     datasetList[1].times = datasetList[1].times.slice(1);
@@ -98,10 +89,7 @@ describe('ExtractDataset', () => {
 
   it('should return a message if there are duplicate days within the dataset time and cancel it', () => {
     // arrange
-    const dataset: string[] = [
-      'RENE=MO10:15-12:00,TU10:00-12:00,TH13:00-13:15,SA14:00-18:00,SU20:00-21:00',
-      `ASTRID=MO10:00-12:00,TH12:00-14:00,TH11:00-20:16,TH08:00-12:37,SU20:00-21:00`
-    ];
+    const dataset: string[] = ['RENE=MO10:15-12:00,TU10:00-12:00,TH13:00-13:15,SA14:00-18:00,SU20:00-21:00', `ASTRID=MO10:00-12:00,TH12:00-14:00,TH11:00-20:16,TH08:00-12:37,SU20:00-21:00`];
     const extractDataset = new ExtractDataset(dataset);
 
     // act

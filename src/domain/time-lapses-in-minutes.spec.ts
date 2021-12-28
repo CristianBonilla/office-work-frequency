@@ -668,4 +668,136 @@ describe('TimeLapsesInMinutes', () => {
     expect(timeLapsesInMinutes['twentieth']).toBeTruthy();
     expect(coincidence).toBeTruthy();
   });
+
+  it('should coincide the 2 times with the twenty first lapse', () => {
+    // arrange
+    const timeLapsesInMinutes = new TimeLapsesInMinutes(
+      {
+        start: {
+          hour: 10,
+          minute: 0
+        },
+        end: {
+          hour: 10,
+          minute: 30
+        }
+      },
+      {
+        start: {
+          hour: 10,
+          minute: 10
+        },
+        end: {
+          hour: 10,
+          minute: 50
+        }
+      }
+    );
+
+    // act
+    const coincidence = timeLapsesInMinutes.hasCoincidences();
+
+    // assert
+    expect(timeLapsesInMinutes['twentyFirst']).toBeTruthy();
+    expect(coincidence).toBeTruthy();
+  });
+
+  it('should coincide the 2 times with the twenty second lapse', () => {
+    // arrange
+    const timeLapsesInMinutes = new TimeLapsesInMinutes(
+      {
+        start: {
+          hour: 10,
+          minute: 10
+        },
+        end: {
+          hour: 10,
+          minute: 50
+        }
+      },
+      {
+        start: {
+          hour: 10,
+          minute: 0
+        },
+        end: {
+          hour: 10,
+          minute: 30
+        }
+      }
+    );
+
+    // act
+    const coincidence = timeLapsesInMinutes.hasCoincidences();
+
+    // assert
+    expect(timeLapsesInMinutes['twentySecond']).toBeTruthy();
+    expect(coincidence).toBeTruthy();
+  });
+
+  it('should coincide the 2 times with the twenty third lapse', () => {
+    // arrange
+    const timeLapsesInMinutes = new TimeLapsesInMinutes(
+      {
+        start: {
+          hour: 10,
+          minute: 10
+        },
+        end: {
+          hour: 10,
+          minute: 30
+        }
+      },
+      {
+        start: {
+          hour: 10,
+          minute: 0
+        },
+        end: {
+          hour: 10,
+          minute: 50
+        }
+      }
+    );
+
+    // act
+    const coincidence = timeLapsesInMinutes.hasCoincidences();
+
+    // assert
+    expect(timeLapsesInMinutes['twentyThird']).toBeTruthy();
+    expect(coincidence).toBeTruthy();
+  });
+
+  it('should coincide the 2 times with the twenty fourth lapse', () => {
+    // arrange
+    const timeLapsesInMinutes = new TimeLapsesInMinutes(
+      {
+        start: {
+          hour: 10,
+          minute: 0
+        },
+        end: {
+          hour: 10,
+          minute: 50
+        }
+      },
+      {
+        start: {
+          hour: 10,
+          minute: 10
+        },
+        end: {
+          hour: 10,
+          minute: 30
+        }
+      }
+    );
+
+    // act
+    const coincidence = timeLapsesInMinutes.hasCoincidences();
+
+    // assert
+    expect(timeLapsesInMinutes['twentyFourth']).toBeTruthy();
+    expect(coincidence).toBeTruthy();
+  });
 });

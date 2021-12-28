@@ -90,6 +90,22 @@ export class TimeLapsesInMinutes {
     return this._startHA === this._endHA && this._endHA === this._endHB && this._startHA > this._startHB && this._startMA < this._endMA && this._endMA <= this._endMB;
   }
 
+  private get twentyFirst() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startHA === this._endHB && this._startMA <= this._startMB && this._startMB < this._endMA && this._endMA <= this._endMB;
+  }
+
+  private get twentySecond() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startHA === this._endHB && this._startMB <= this._startMA && this._startMA < this._endMB && this._endMB <= this._endMA;
+  }
+
+  private get twentyThird() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startHA === this._endHB && this._startMB <= this._startMA && this._startMA < this._endMA && this._endMA <= this._endMB;
+  }
+
+  private get twentyFourth() {
+    return this._startHA === this._startHB && this._endHA === this._endHB && this._startHA === this._endHB && this._startMA <= this._startMB && this._startMB < this._endMB && this._endMB <= this._endMA;
+  }
+
   constructor(timeA: Omit<Time, 'day'>, timeB: Omit<Time, 'day'>) {
     const { hour: startHA, minute: startMA } = timeA.start;
     const { hour: endHA, minute: endMA } = timeA.end;
@@ -126,7 +142,11 @@ export class TimeLapsesInMinutes {
       this.seventeenth,
       this.eighteenth,
       this.nineteenth,
-      this.twentieth
+      this.twentieth,
+      this.twentyFirst,
+      this.twentySecond,
+      this.twentyThird,
+      this.twentyFourth
     ].some(lapse => lapse);
   }
 }

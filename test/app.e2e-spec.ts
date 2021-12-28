@@ -1,24 +1,30 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { InquirerService } from 'nest-commander';
+import { CommandTestFactory } from 'nest-commander-testing';
+import { TestingModule } from '@nestjs/testing';
+import { CHOICES } from '@contracts/constants/choices';
+import { AppModule } from '../src/app.module';
 
-describe('AppController (e2e)', () => {
-  let app: INestApplication;
+const [DATASET_FILE] = CHOICES;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+describe('FrequencyCommand (e2e)', () => {
+  let command: TestingModule;
+  let inquirer: InquirerService;
+
+  beforeAll(async () => {
+    command = await CommandTestFactory.createTestingCommand({
+      imports: [AppModule]
     }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    inquirer = command.get(InquirerService);
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('should invoke the "run" method', async () => {
+    // arrange
+    jest.spyOn(inquirer, 'ask').mockReturnValue(Promise.resolve({ 'try-again': false }));
+
+    // act
+    await CommandTestFactory.run(command, [DATASET_FILE]);
+
+    // assert
+    expect(inquirer.ask).toBeCalled();
   });
 });
